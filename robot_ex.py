@@ -1,7 +1,7 @@
 #!/usr/bin/python
 import fileinput,sys
 matrix = []
-for line in sys.stdin.readlines():
+for line in sys.stdin.readlines():#read and store the map
 	if not line.strip():
 		continue
 	lineNodes = line.split()
@@ -55,11 +55,11 @@ while(len(priorityList)):
 			elif n[1] == currentNode[1] and n[0] == currentNode[0]-1:
 				newMove = moves + ["l"]
 			pos = -1
-			for index in range(len(priorityList)):
+			for index in range(len(priorityList)):#check whether the neighbour is in the list
 				if n == priorityList[index][0] and totalCost < priorityList[index][2]:
 					pos = index
 					break
-			if pos != -1:
+			if pos != -1: #if it is in the list, update the cost to the lower cost
 				priorityList[pos] = (n, newMove, totalCost)
 			else:
 				priorityList.append((n, newMove, totalCost))
