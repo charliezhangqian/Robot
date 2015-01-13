@@ -1,7 +1,7 @@
 #!/usr/bin/python
 import fileinput,sys
 matrix = []
-for line in sys.stdin.readlines():
+for line in sys.stdin.readlines():  #store the map
 	if not line.strip():
 		continue
 	lineNodes = line.split()
@@ -25,7 +25,7 @@ def getSeccessors(node):
 def my_cmp(E1,E2):
 	return cmp(E1[2],E2[2])
 
-priorityList.append((startNode, [], 0))
+priorityList.append((startNode, [], 0)) #used to pick the least cost path
 
 while(len(priorityList)):
 	p = priorityList.pop(0)
@@ -47,11 +47,11 @@ while(len(priorityList)):
 			elif n[1] == currentNode[1]:
 				newMove = moves + ["r"]
 			pos = -1
-			for index in range(len(priorityList)):
+			for index in range(len(priorityList)):#to check whether the heighbour has in the piority list
 				if n == priorityList[index][0] and totalCost < priorityList[index][2]:
 					pos = index
 					break
-			if pos != -1:
+			if pos != -1: #when the neighbour is in the list, update the cost
 				priorityList[pos] = (n, newMove, totalCost)
 			else:
 				priorityList.append((n, newMove, totalCost))

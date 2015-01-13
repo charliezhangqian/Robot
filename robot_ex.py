@@ -17,6 +17,15 @@
 #the branching factor.                                                #
 #######################################################################
 import fileinput,sys
+<<<<<<< HEAD
+=======
+matrix = []
+for line in sys.stdin.readlines():#read and store the map
+	if not line.strip():
+		continue
+	lineNodes = line.split()
+	matrix.append(lineNodes)
+>>>>>>> 89938144fc0c5b9a5161c65d91455880f2b702e1
 
 class pathSearch(object):
 	explored = []      #to store the nodes that have been explored
@@ -87,6 +96,7 @@ class pathSearch(object):
 		else:
 			self.priorityList.append((node, newMove, totalCost))
 
+<<<<<<< HEAD
 	#Pop the least cost node from the priorityList and explore its
 	#successors. Keep doing this untill the ending node is found.
 	def findPath(self):
@@ -113,3 +123,31 @@ def main():
 
 if __name__ == "__main__":
 	main()
+=======
+	if currentNode[0] == columns - 1 and currentNode[1] == rows - 1:
+		print moves
+		print cost
+		break
+	explored.append(currentNode)
+	for n in getSeccessors(currentNode):
+		if n not in explored:
+			totalCost = cost + int(matrix[n[1]][n[0]], 16)
+			if n[0] == currentNode[0] and n[1] == currentNode[1]+1:
+				newMove = moves + ["d"]
+			elif n[1] == currentNode[1] and n[0] == currentNode[0]+1:
+				newMove = moves + ["r"]
+			elif n[0] == currentNode[0] and n[1] == currentNode[1]-1:
+				newMove = moves + ["u"]
+			elif n[1] == currentNode[1] and n[0] == currentNode[0]-1:
+				newMove = moves + ["l"]
+			pos = -1
+			for index in range(len(priorityList)):#check whether the neighbour is in the list
+				if n == priorityList[index][0] and totalCost < priorityList[index][2]:
+					pos = index
+					break
+			if pos != -1: #if it is in the list, update the cost to the lower cost
+				priorityList[pos] = (n, newMove, totalCost)
+			else:
+				priorityList.append((n, newMove, totalCost))
+	priorityList.sort(my_cmp)
+>>>>>>> 89938144fc0c5b9a5161c65d91455880f2b702e1
